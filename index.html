@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CARE LINK · 스마트 병원 케어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 중앙 모바일 프레임 -->
+  <div class="phone" id="phone">
+    <!-- 상단 상태바 (시스템 흉내) -->
+    <div class="statusbar">
+      <span class="sb-time">09:24</span>
+      <span class="sb-icons">
+        <span class="sb-dot"></span>
+        <span class="sb-signal"></span>
+        <span class="sb-batt"></span>
+      </span>
+    </div>
+
+    <!-- 앱 헤더 -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="brand-ring"></span>
+          <span class="brand-core"></span>
+        </div>
+        <div class="brand-text">
+          <h1>CARE<span>LINK</span></h1>
+          <p class="brand-sub">스마트 병동 케어</p>
+        </div>
+      </div>
+      <button class="device-chip" id="deviceChip" type="button">
+        <span class="device-led" id="deviceLed"></span>
+        <span class="device-label" id="deviceLabel">디바이스 연결됨</span>
+      </button>
+    </header>
+
+    <!-- 스크롤 되는 본문 -->
+    <main class="screen-wrap" id="screenWrap">
+
+      <!-- ===================== 홈 ===================== -->
+      <section class="screen is-active" id="screen-home" data-screen="home">
+        <div class="greeting">
+          <p class="greet-hi">안녕하세요, <b>김서연</b> 간호사님</p>
+          <p class="greet-sub">오늘은 <b>주간 근무</b> · 3병동 담당</p>
+        </div>
+
+        <!-- 요약 통계 -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="stat-ico ico-patient"></span>
+            <span class="stat-num" id="statPatients">12</span>
+            <span class="stat-lbl">담당 환자</span>
+          </div>
+          <div class="stat-card stat-danger">
+            <span class="stat-ico ico-alert"></span>
+            <span class="stat-num" id="statUrgent">2</span>
+            <span class="stat-lbl">긴급 알림</span>
+          </div>
+          <div class="stat-card stat-info">
+            <span class="stat-ico ico-clock"></span>
+            <span class="stat-num" id="statWaiting">5</span>
+            <span class="stat-lbl">대기 요청</span>
+          </div>
+        </div>
+
+        <!-- 디바이스 연결 상태 배너 -->
+        <div class="device-banner" id="deviceBanner">
+          <div class="db-visual">
+            <div class="db-device">
+              <span class="db-device-dot"></span>
+            </div>
+            <div class="db-wave"><i></i><i></i><i></i></div>
+          </div>
+          <div class="db-info">
+            <p class="db-title">CARE LINK 넥밴드 <b id="dbState">정상 연결</b></p>
+            <p class="db-meta"><span id="dbBattery">배터리 82%</span> · 신호 안정 · 3병동 스테이션</p>
+          </div>
+          <button class="db-refresh" id="dbRefresh" type="button" aria-label="새로고침"></button>
+        </div>
+
+        <!-- 긴급 배너 -->
+        <button class="emergency-banner" id="emergencyBanner" type="button">
+          <span class="eb-pulse"></span>
+          <div class="eb-text">
+            <span class="eb-title">긴급 호출 · 302호 이정호님</span>
+            <span class="eb-sub">이상 생체신호 감지 · 즉시 확인</span>
+          </div>
+          <span class="eb-arrow"></span>
+        </button>
+
+        <!-- 인수인계 요약 카드 -->
+        <div class="section-head">
+          <h2>인수인계 요약</h2>
+          <button class="link-btn" data-open="handoff" type="button">전체보기</button>
+        </div>
+        <div class="handoff-card" data-open="handoff">
+          <div class="hc-top">
+            <span class="ai-badge"><span class="ai-dot"></span>AI 자동 정리</span>
+            <span class="hc-time">08:50 인수 완료</span>
+          </div>
+          <p class="hc-summary">
+            야간 대비 <b>안정적</b>입니다. 주의 환자 <b>2명</b>, 미처리 업무 <b>3건</b>이 있습니다.
+            301호 박민수님 오전 채혈, 305호 최영자님 낙상 주의 지속 필요.
+          </p>
+          <div class="hc-tags">
+            <span class="mini-tag tag-blue">투약 4</span>
+            <span class="mini-tag tag-mint">검사 2</span>
+            <span class="mini-tag tag-amber">주의 2</span>
+            <span class="mini-tag tag-gray">미처리 3</span>
+          </div>
+        </div>
+
+        <!-- 빠른 실행 -->
+        <div class="section-head"><h2>빠른 실행</h2></div>
+        <div class="quick-grid">
+          <button class="quick-btn" data-goto="requests" type="button">
+            <span class="q-ico q-req"></span>요청 처리
+          </button>
+          <button class="quick-btn" data-open="guide" type="button">
+            <span class="q-ico q-guide"></span>설명 가이드
+          </button>
+          <button class="quick-btn" data-goto="patients" type="button">
+            <span class="q-ico q-board"></span>협업 보드
+          </button>
+          <button class="quick-btn" data-open="handoff" type="button">
+            <span class="q-ico q-hand"></span>인수인계
+          </button>
+        </div>
+        <div class="bottom-space"></div>
+      </section>
+
+      <!-- ===================== 환자 / 협업 보드 ===================== -->
+      <section class="screen" id="screen-patients" data-screen="patients">
+        <div class="page-head">
+          <h2 class="page-title">실시간 협업 보드</h2>
+          <p class="page-desc">간호사 간 환자 상태를 실시간으로 공유합니다</p>
+        </div>
+
+        <div class="board-legend">
+          <span class="lg"><i class="lg-dot d-wait"></i>대기</span>
+          <span class="lg"><i class="lg-dot d-progress"></i>진행 중</span>
+          <span class="lg"><i class="lg-dot d-done"></i>완료</span>
+        </div>
+
+        <div class="filter-row" id="patientFilter">
+          <button class="chip is-on" data-status="all" type="button">전체</button>
+          <button class="chip" data-status="wait" type="button">대기</button>
+          <button class="chip" data-status="progress" type="button">진행 중</button>
+          <button class="chip" data-status="done" type="button">완료</button>
+        </div>
+
+        <div class="patient-list" id="patientList"><!-- JS 렌더 --></div>
+        <div class="bottom-space"></div>
+      </section>
+
+      <!-- ===================== 요청 ===================== -->
+      <section class="screen" id="screen-requests" data-screen="requests">
+        <div class="page-head">
+          <h2 class="page-title">환자 요청 관리</h2>
+          <p class="page-desc">CARE LINK로 수신된 요청을 처리하세요</p>
+        </div>
+
+        <div class="filter-row" id="requestFilter">
+          <button class="chip is-on" data-type="all" type="button">전체</button>
+          <button class="chip" data-type="emergency" type="button">응급</button>
+          <button class="chip" data-type="normal" type="button">일반</button>
+          <button class="chip" data-type="guide" type="button">안내</button>
+        </div>
+
+        <div class="request-list" id="requestList"><!-- JS 렌더 --></div>
+        <div class="empty-state" id="requestEmpty" hidden>
+          <span class="empty-ico"></span>
+          <p>처리할 요청이 없습니다</p>
+        </div>
+        <div class="bottom-space"></div>
+      </section>
+
+      <!-- ===================== 알림 / 위험 감지 ===================== -->
+      <section class="screen" id="screen-alerts" data-screen="alerts">
+        <div class="page-head">
+          <h2 class="page-title">위험 감지 알림</h2>
+          <p class="page-desc">CARE LINK AI가 감지한 위험 신호입니다</p>
+        </div>
+
+        <div class="filter-row" id="alertFilter">
+          <button class="chip is-on" data-level="all" type="button">전체</button>
+          <button class="chip" data-level="critical" type="button">중요</button>
+          <button class="chip" data-level="warning" type="button">주의</button>
+          <button class="chip" data-level="info" type="button">정보</button>
+        </div>
+
+        <div class="alert-list" id="alertList"><!-- JS 렌더 --></div>
+        <div class="bottom-space"></div>
+      </section>
+
+      <!-- ===================== 설정 ===================== -->
+      <section class="screen" id="screen-settings" data-screen="settings">
+        <div class="page-head">
+          <h2 class="page-title">설정</h2>
+          <p class="page-desc">계정 및 디바이스 · 알림을 관리합니다</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">김</div>
+          <div class="profile-info">
+            <p class="profile-name">김서연 <span class="role-badge">간호사</span></p>
+            <p class="profile-meta">3병동 · 사번 N-20418</p>
+          </div>
+          <button class="ghost-btn" type="button">편집</button>
+        </div>
+
+        <div class="settings-group">
+          <p class="sg-title">디바이스</p>
+          <div class="set-row">
+            <span class="set-label"><span class="set-ico si-device"></span>CARE LINK 넥밴드</span>
+            <span class="set-val" id="setDeviceState">연결됨</span>
+          </div>
+          <div class="set-row">
+            <span class="set-label"><span class="set-ico si-station"></span>병동 스테이션 동기화</span>
+            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <p class="sg-title">알림</p>
+          <div class="set-row">
+            <span class="set-label"><span class="set-ico si-bell"></span>긴급 호출 진동</span>
+            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+          </div>
+          <div class="set-row">
+            <span class="set-label"><span class="set-ico si-risk"></span>위험 감지 푸시</span>
+            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+          </div>
+          <div class="set-row">
+            <span class="set-label"><span class="set-ico si-hand"></span>인수인계 요약 알림</span>
+            <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <p class="sg-title">케어 도구</p>
+          <button class="set-row set-link" data-open="guide" type="button">
+            <span class="set-label"><span class="set-ico si-guide"></span>환자 설명 가이드</span>
+            <span class="set-arrow"></span>
+          </button>
+          <button class="set-row set-link" data-open="handoff" type="button">
+            <span class="set-label"><span class="set-ico si-doc"></span>인수인계 자동 정리</span>
+            <span class="set-arrow"></span>
+          </button>
+        </div>
+
+        <button class="logout-btn" type="button">로그아웃</button>
+        <p class="app-version">CARE LINK App v1.0.0</p>
+        <div class="bottom-space"></div>
+      </section>
+
+    </main>
+
+    <!-- 하단 탭 바 (고정) -->
+    <nav class="tabbar" id="tabbar">
+      <button class="tab is-active" data-tab="home" type="button">
+        <span class="tab-ico ti-home"></span><span class="tab-txt">홈</span>
+      </button>
+      <button class="tab" data-tab="patients" type="button">
+        <span class="tab-ico ti-patient"></span><span class="tab-txt">환자</span>
+      </button>
+      <button class="tab" data-tab="requests" type="button">
+        <span class="tab-ico ti-req"></span><span class="tab-txt">요청</span>
+        <span class="tab-badge" id="tabReqBadge">5</span>
+      </button>
+      <button class="tab" data-tab="alerts" type="button">
+        <span class="tab-ico ti-bell"></span><span class="tab-txt">알림</span>
+        <span class="tab-badge tab-badge-red" id="tabAlertBadge">3</span>
+      </button>
+      <button class="tab" data-tab="settings" type="button">
+        <span class="tab-ico ti-set"></span><span class="tab-txt">설정</span>
+      </button>
+    </nav>
+
+    <!-- ===== 인수인계 상세 (오버레이) ===== -->
+    <div class="overlay" id="overlay-handoff">
+      <div class="ov-head">
+        <button class="ov-back" data-close type="button"></button>
+        <h3>인수인계 자동 정리</h3>
+        <span class="ov-time">주간 → 야간</span>
+      </div>
+      <div class="ov-body">
+        <div class="ai-summary-card">
+          <div class="ai-sum-head">
+            <span class="ai-badge"><span class="ai-dot"></span>AI 요약</span>
+            <span class="hc-time">2026.07.03 08:50</span>
+          </div>
+          <p class="ai-sum-text">
+            담당 12명 중 <b>안정 9명</b>, <b>주의 2명</b>, <b>관찰 1명</b>입니다.
+            미처리 업무 3건은 인계 전 확인이 필요합니다. 302호 이정호님은
+            생체신호 변동으로 야간 집중 관찰 대상입니다.
+          </p>
+        </div>
+
+        <div class="handoff-section">
+          <h4 class="hs-title"><span class="hs-ico h-med"></span>투약</h4>
+          <div class="hs-item"><b>301 박민수</b> · 09:00 항생제 IV · <span class="tag-gray mini-tag">예정</span></div>
+          <div class="hs-item"><b>304 정해나</b> · 14:00 인슐린 · <span class="tag-mint mini-tag">완료</span></div>
+        </div>
+        <div class="handoff-section">
+          <h4 class="hs-title"><span class="hs-ico h-test"></span>검사</h4>
+          <div class="hs-item"><b>301 박민수</b> · 오전 채혈 (공복) · <span class="tag-gray mini-tag">대기</span></div>
+          <div class="hs-item"><b>308 한지우</b> · 흉부 X-ray · <span class="tag-mint mini-tag">완료</span></div>
+        </div>
+        <div class="handoff-section">
+          <h4 class="hs-title"><span class="hs-ico h-warn"></span>주의사항</h4>
+          <div class="hs-item hs-warn"><b>305 최영자</b> · 낙상 고위험 · 야간 라운딩 강화</div>
+          <div class="hs-item hs-warn"><b>302 이정호</b> · 생체신호 변동 · 집중 관찰</div>
+        </div>
+        <div class="handoff-section">
+          <h4 class="hs-title"><span class="hs-ico h-todo"></span>미처리 업무</h4>
+          <label class="todo-item"><input type="checkbox" /><span>301 박민수 채혈 오더 확인</span></label>
+          <label class="todo-item"><input type="checkbox" /><span>306 보호자 면담 요청 회신</span></label>
+          <label class="todo-item"><input type="checkbox" /><span>310 수액 잔량 점검</span></label>
+        </div>
+
+        <button class="primary-btn full" data-toast="인수인계가 야간 근무자에게 전달되었습니다" type="button">
+          인수인계 전달하기
+        </button>
+        <div class="bottom-space"></div>
+      </div>
+    </div>
+
+    <!-- ===== 환자 설명 가이드 (오버레이) ===== -->
+    <div class="overlay" id="overlay-guide">
+      <div class="ov-head">
+        <button class="ov-back" data-close type="button"></button>
+        <h3>환자 설명 가이드</h3>
+        <span class="ov-time"></span>
+      </div>
+      <div class="ov-body">
+        <p class="guide-intro">환자·보호자에게 바로 전달할 수 있는 표준 안내 문구입니다.</p>
+        <div class="guide-tabs" id="guideTabs">
+          <button class="g-tab is-on" data-guide="test" type="button">검사 전</button>
+          <button class="g-tab" data-guide="med" type="button">투약</button>
+          <button class="g-tab" data-guide="discharge" type="button">퇴원</button>
+        </div>
+        <div class="guide-content" id="guideContent"><!-- JS 렌더 --></div>
+        <div class="bottom-space"></div>
+      </div>
+    </div>
+
+    <!-- ===== 긴급 상황 지원 (풀스크린) ===== -->
+    <div class="emergency-screen" id="emergencyScreen">
+      <div class="es-pulse-bg"></div>
+      <div class="es-inner">
+        <div class="es-top">
+          <span class="es-flag">긴급 상황</span>
+          <button class="es-close" id="esClose" type="button" aria-label="닫기"></button>
+        </div>
+
+        <div class="es-alert-card">
+          <span class="es-big-pulse"></span>
+          <p class="es-type">이상 생체신호 감지</p>
+          <p class="es-patient">이정호 <span>· 남 · 68세</span></p>
+          <div class="es-vitals">
+            <div class="es-vital"><span class="ev-num">142</span><span class="ev-lbl">HR bpm</span></div>
+            <div class="es-vital"><span class="ev-num">88</span><span class="ev-lbl">SpO₂ %</span></div>
+            <div class="es-vital"><span class="ev-num">38.9</span><span class="ev-lbl">Temp ℃</span></div>
+          </div>
+        </div>
+
+        <div class="es-location">
+          <span class="es-loc-ico"></span>
+          <div>
+            <p class="es-loc-room">302호 · 3병동</p>
+            <p class="es-loc-desc">엘리베이터 방면 3번째 병실</p>
+          </div>
+        </div>
+
+        <div class="es-actions">
+          <button class="es-btn es-call" data-toast="주치의·당직의에게 즉시 호출을 전송했습니다" type="button">
+            <span class="es-btn-ico esi-call"></span>즉시 호출
+          </button>
+          <button class="es-btn es-share" data-toast="병동 의료진에게 상황을 공유했습니다" type="button">
+            <span class="es-btn-ico esi-share"></span>의료진 공유
+          </button>
+          <button class="es-btn es-record" data-toast="대응 기록이 저장되었습니다" type="button">
+            <span class="es-btn-ico esi-record"></span>기록 남기기
+          </button>
+        </div>
+
+        <button class="es-resolve" id="esResolve" type="button">상황 종료 처리</button>
+      </div>
+    </div>
+
+    <!-- 토스트 -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
